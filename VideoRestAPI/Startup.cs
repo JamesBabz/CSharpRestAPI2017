@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using VideoAppBLL;
+using VideoAppBLL.BusinessObject;
 
 namespace VideoRestAPI
 {
@@ -32,6 +34,25 @@ namespace VideoRestAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //Default videos
+                var facade = new BLLFacade();
+                facade.VideoService.Create(new VideoBO()
+                {
+                    Name = "First Video",
+                    Genre = "Action"
+                });
+                facade.VideoService.Create(new VideoBO()
+                {
+                    Name = "Second Video",
+                    Genre = "Comedy"
+                });
+                facade.VideoService.Create(new VideoBO()
+                {
+                    Name = "Third Video",
+                    Genre = "Thriller"
+                });
+
             }
 
             app.UseMvc();
