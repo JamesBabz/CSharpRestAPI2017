@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using VideoAppEntity;
+using VideoAppDAL.Entities;
 
 namespace VideoAppDAL
 {

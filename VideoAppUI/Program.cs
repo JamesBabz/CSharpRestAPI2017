@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using VideoAppBLL;
-using VideoAppEntity;
+using VideoAppBLL.BusinessObject;
 
 namespace VideoAppUI
 {
     class Program
     {
         static BLLFacade bllFacade = new BLLFacade();
-        static List<Video> videosToAdd = new List<Video>();
+        static List<VideoBO> videosToAdd = new List<VideoBO>();
 
         static void Main(string[] args)
         {
@@ -126,7 +126,7 @@ namespace VideoAppUI
             Console.WriteLine(response);
         }
 
-        private static Video FindVideoById()
+        private static VideoBO FindVideoById()
         {
             Console.WriteLine("Insert video id:");
             int inputId;
@@ -144,7 +144,7 @@ namespace VideoAppUI
             Console.WriteLine("Input genre:");
             var genre = Console.ReadLine();
 
-            bllFacade.VideoService.Create(new Video()
+            bllFacade.VideoService.Create(new VideoBO()
             {
                 Name = name,
                 Genre = genre
@@ -158,7 +158,7 @@ namespace VideoAppUI
             Console.WriteLine("Input genre:");
             var genre = Console.ReadLine();
 
-            videosToAdd.Add(new Video()
+            videosToAdd.Add(new VideoBO()
             {
                 Name = name,
                 Genre = genre
@@ -182,17 +182,17 @@ namespace VideoAppUI
 
         private static void AddDefaultVideos()
         {
-            bllFacade.VideoService.Create(new Video()
+            bllFacade.VideoService.Create(new VideoBO()
             {
                 Name = "First Video",
                 Genre = "Action"
             });
-            bllFacade.VideoService.Create(new Video()
+            bllFacade.VideoService.Create(new VideoBO()
             {
                 Name = "Second Video",
                 Genre = "Comedy"
             });
-            bllFacade.VideoService.Create(new Video()
+            bllFacade.VideoService.Create(new VideoBO()
             {
                 Name = "Third Video",
                 Genre = "Thriller"
