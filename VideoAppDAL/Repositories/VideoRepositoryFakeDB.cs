@@ -16,7 +16,7 @@ namespace VideoAppDAL.Repositories
             {
                 Id = Id++,
                 Name = video.Name,
-                Genre = video.Genre
+                Price = video.Price
             });
             return newVideo;
         }
@@ -28,7 +28,7 @@ namespace VideoAppDAL.Repositories
 
         public List<Video> Search(string query)
         {
-            return GetAll().Where(x => x.Name.ToLower().Contains(query) || x.Genre.ToLower().Contains(query)).ToList();
+            return GetAll().Where(x => x.Name.ToLower().Contains(query)).ToList();
         }
 
         public Video GetById(int id)

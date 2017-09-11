@@ -6,16 +6,20 @@ using VideoAppDAL.Repositories;
 
 namespace VideoAppDAL.UOW
 {
-    class UnitOfWorkMem : IUnitOfWork
+    class UnitOfWork : IUnitOfWork
     {
         
         public IVideoRepository VideoRepository { get; internal set; }
-        private InMemoryContext context;
 
-        public UnitOfWorkMem()
+        public IGenreRepository GenreRepository { get; internal set; }
+
+        private VideoAppContext context;
+
+        public UnitOfWork()
         {
-            context = new InMemoryContext();
+            context = new VideoAppContext();
             VideoRepository = new VideoRepositoryEFMemory(context);
+            GenreRepository = new GenreRepository(context);
         }
 
         public int Complete()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using VideoAppBLL;
-using VideoAppBLL.BusinessObject;
+using VideoAppBLL.BusinessObjects;
 
 namespace VideoAppUI
 {
@@ -92,7 +92,7 @@ namespace VideoAppUI
             }
             else
             {
-                searchList.ForEach(x => Console.WriteLine($"ID: {x.Id}. Name: {x.Name}. Genre: {x.Genre}."));
+                searchList.ForEach(x => Console.WriteLine($"ID: {x.Id}. Name: {x.Name}. Price: {x.Price}."));
             }
         }
 
@@ -104,9 +104,14 @@ namespace VideoAppUI
                 Console.WriteLine($"Current Name: {videoFound.Name}");
                 Console.WriteLine("Insert new name:");
                 videoFound.Name = Console.ReadLine();
-                Console.WriteLine($"Current Genre: {videoFound.Genre}");
-                Console.WriteLine("Insert new genre:");
-                videoFound.Genre = Console.ReadLine();
+                Console.WriteLine($"Current price: {videoFound.Price}");
+                Console.WriteLine("Insert new price:");
+                float inputPrice;
+                while (!float.TryParse(Console.ReadLine(), out inputPrice))
+                {
+                    Console.WriteLine("That is not a valid input");
+                }
+                videoFound.Price = inputPrice;
                 bllFacade.VideoService.Update(videoFound);
             }
             else
@@ -141,13 +146,17 @@ namespace VideoAppUI
         {
             Console.WriteLine("Input name:");
             var name = Console.ReadLine();
-            Console.WriteLine("Input genre:");
-            var genre = Console.ReadLine();
+            Console.WriteLine("Input price:");
+            float price;
+            while (!float.TryParse(Console.ReadLine(), out price))
+            {
+                Console.WriteLine("That is not a valid input");
+            }
 
             bllFacade.VideoService.Create(new VideoBO()
             {
                 Name = name,
-                Genre = genre
+                Price = price
             });
         }
 
@@ -155,13 +164,17 @@ namespace VideoAppUI
         {
             Console.WriteLine("Input name:");
             var name = Console.ReadLine();
-            Console.WriteLine("Input genre:");
-            var genre = Console.ReadLine();
+            Console.WriteLine("Input price:");
+            float price;
+            while (!float.TryParse(Console.ReadLine(), out price))
+            {
+                Console.WriteLine("That is not a valid input");
+            }
 
             videosToAdd.Add(new VideoBO()
             {
                 Name = name,
-                Genre = genre
+                Price = price
             });
 
         }
@@ -176,7 +189,7 @@ namespace VideoAppUI
         {
             foreach (var video in bllFacade.VideoService.GetAll())
             {
-                Console.WriteLine($"Id: {video.Id} Name: {video.Name}. Genre: {video.Genre}");
+                Console.WriteLine($"Id: {video.Id} Name: {video.Name}. Price: {video.Price}");
             }
         }
 
@@ -185,17 +198,17 @@ namespace VideoAppUI
             bllFacade.VideoService.Create(new VideoBO()
             {
                 Name = "First Video",
-                Genre = "Action"
+                Price = 100
             });
             bllFacade.VideoService.Create(new VideoBO()
             {
                 Name = "Second Video",
-                Genre = "Comedy"
+                Price = 200
             });
             bllFacade.VideoService.Create(new VideoBO()
             {
                 Name = "Third Video",
-                Genre = "Thriller"
+                Price = 300
             });
         }
 

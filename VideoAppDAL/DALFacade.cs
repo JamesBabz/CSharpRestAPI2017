@@ -10,7 +10,7 @@ namespace VideoAppDAL
         {
             get
             {
-                return new UnitOfWorkMem();
+                return new UnitOfWork();
             }
         }
     }

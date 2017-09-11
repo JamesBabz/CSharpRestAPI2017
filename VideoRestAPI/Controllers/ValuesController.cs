@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using VideoAppBLL.BusinessObject;
+using VideoAppBLL.BusinessObjects;
 
 namespace VideoRestAPI.Controllers
 {
@@ -26,7 +26,7 @@ namespace VideoRestAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]VideoBO value)
+        public void Post([FromBody]string value)
         {
         }
 

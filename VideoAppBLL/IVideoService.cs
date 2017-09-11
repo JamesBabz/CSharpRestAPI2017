@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using VideoAppBLL.BusinessObject;
+using VideoAppBLL.BusinessObjects;
 
 namespace VideoAppBLL
 {

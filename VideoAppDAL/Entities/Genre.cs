@@ -4,11 +4,13 @@ using System.Text;
 
 namespace VideoAppDAL.Entities
 {
-    public class Video
+    public class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public float Price { get; set; }
-        public List<Genre> Genres { get; set; }
+
+
+        public int VideoId { get; set; }
+        public Video Video { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using VideoAppBLL;
-using VideoAppBLL.BusinessObject;
+using VideoAppBLL.BusinessObjects;
 
 namespace VideoRestAPI
 {
@@ -37,20 +37,40 @@ namespace VideoRestAPI
 
                 //Default videos
                 var facade = new BLLFacade();
-                facade.VideoService.Create(new VideoBO()
+                var video = facade.VideoService.Create(new VideoBO()
                 {
                     Name = "First Video",
-                    Genre = "Action"
+                    Price = 100
                 });
-                facade.VideoService.Create(new VideoBO()
+
+                facade.GenreService.Create(new GenreBO()
+                {
+                    Name = "Action",
+                    VideoId = video.Id
+                });
+
+                video = facade.VideoService.Create(new VideoBO()
                 {
                     Name = "Second Video",
-                    Genre = "Comedy"
+                    Price = 200
                 });
-                facade.VideoService.Create(new VideoBO()
+
+                facade.GenreService.Create(new GenreBO()
+                {
+                    Name = "Thriller",
+                    VideoId = video.Id
+                });
+
+                video = facade.VideoService.Create(new VideoBO()
                 {
                     Name = "Third Video",
-                    Genre = "Thriller"
+                    Price = 300
+                });
+                
+                facade.GenreService.Create(new GenreBO()
+                {
+                    Name = "Comedy",
+                    VideoId = video.Id
                 });
 
             }
