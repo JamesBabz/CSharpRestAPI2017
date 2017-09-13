@@ -37,40 +37,41 @@ namespace VideoRestAPI
 
                 //Default videos
                 var facade = new BLLFacade();
-                var video = facade.VideoService.Create(new VideoBO()
+
+                var genre = facade.GenreService.Create(new GenreBO()
+                {
+                    Name = "Action"
+                });
+
+                facade.VideoService.Create(new VideoBO()
                 {
                     Name = "First Video",
-                    Price = 100
+                    Price = 100,
+                    GenreId = genre.Id
                 });
 
-                facade.GenreService.Create(new GenreBO()
+                genre = facade.GenreService.Create(new GenreBO()
                 {
-                    Name = "Action",
-                    VideoId = video.Id
+                    Name = "Thriller"
                 });
 
-                video = facade.VideoService.Create(new VideoBO()
+                facade.VideoService.Create(new VideoBO()
                 {
                     Name = "Second Video",
-                    Price = 200
+                    Price = 200,
+                    GenreId = genre.Id
                 });
 
-                facade.GenreService.Create(new GenreBO()
+                genre = facade.GenreService.Create(new GenreBO()
                 {
-                    Name = "Thriller",
-                    VideoId = video.Id
+                    Name = "Comedy"
                 });
 
-                video = facade.VideoService.Create(new VideoBO()
+                facade.VideoService.Create(new VideoBO()
                 {
                     Name = "Third Video",
-                    Price = 300
-                });
-                
-                facade.GenreService.Create(new GenreBO()
-                {
-                    Name = "Comedy",
-                    VideoId = video.Id
+                    Price = 100,
+                    GenreId = genre.Id
                 });
 
             }

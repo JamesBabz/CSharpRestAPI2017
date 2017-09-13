@@ -14,8 +14,7 @@ namespace VideoAppBLL.Converters
             return new Genre()
             {
                 Id = genre.Id,
-                Name = genre.Name,
-                VideoId = genre.VideoId
+                Name = genre.Name
                 
             };
         }
@@ -25,9 +24,7 @@ namespace VideoAppBLL.Converters
             return new GenreBO()
             {
                 Id = genre.Id,
-                Name = genre.Name,
-                Video = new VideoConverter().Convert(genre.Video),
-                VideoId = genre.VideoId
+                Name = genre.Name
             };
         }
     }

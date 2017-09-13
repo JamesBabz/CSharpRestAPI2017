@@ -49,9 +49,7 @@ namespace VideoAppBLL.Services
         {
             using (var uow = _facade.UnitOfWork)
             {
-                var genreEntity = uow.GenreRepository.GetById(id);
-                genreEntity.Video = uow.VideoRepository.GetById(genreEntity.VideoId);
-                return converter.Convert(genreEntity);
+                return converter.Convert(uow.GenreRepository.GetById(id));
             }
         }
 
@@ -67,17 +65,14 @@ namespace VideoAppBLL.Services
         {
             using (var uow = _facade.UnitOfWork)
             {
-                var genreEntity = uow.GenreRepository.GetById(genre.Id);
-                if(genreEntity == null)
+                var genreFromDb = uow.GenreRepository.GetById(genre.Id);
+                if (genreFromDb == null)
                 {
                     throw new InvalidOperationException("Genre not found");
                 }
-                genreEntity.Name = genre.Name;
-                genreEntity.VideoId = genre.VideoId;
+                genreFromDb.Name = genre.Name;
                 uow.Complete();
-
-                genreEntity.Video = uow.VideoRepository.GetById(genreEntity.VideoId);
-                return converter.Convert(genreEntity);
+                return converter.Convert(genreFromDb);
             }
         }
     }

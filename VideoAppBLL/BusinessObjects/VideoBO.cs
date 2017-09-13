@@ -14,6 +14,8 @@ namespace VideoAppBLL.BusinessObjects
         [MaxLength (20)]
         public string Name { get; set; }
         public float Price { get; set; }
+
+        public int GenreId { get; set; }
         public GenreBO Genre { get; set; }
     }
 }

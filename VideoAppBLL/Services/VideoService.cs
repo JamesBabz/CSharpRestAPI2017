@@ -53,24 +53,31 @@ namespace VideoAppBLL.Services
         {
             using (var uow = _facade.UnitOfWork)
             {
-                return converter.Convert(uow.VideoRepository.GetById(id));
+                var videoEntity = uow.VideoRepository.GetById(id);
+                videoEntity.Genre = uow.GenreRepository.GetById(videoEntity.GenreId);
+                return converter.Convert(videoEntity);
             }
         }
 
         public VideoBO Update(VideoBO video)
         {
+            
             using (var uow = _facade.UnitOfWork)
             {
-                var videoFromDb = uow.VideoRepository.GetById(video.Id);
-                if (videoFromDb == null)
+                var videoEntity = uow.VideoRepository.GetById(video.Id);
+                if (videoEntity == null)
                 {
                     throw new InvalidOperationException("Video not found");
                 }
-                videoFromDb.Name = video.Name;
-                videoFromDb.Price = video.Price;
+                videoEntity.Name = video.Name;
+                videoEntity.Price = video.Price;
+                videoEntity.GenreId = video.GenreId;
                 uow.Complete();
-                return converter.Convert(videoFromDb);
+
+                videoEntity.Genre = uow.GenreRepository.GetById(videoEntity.GenreId);
+                return converter.Convert(videoEntity);
             }
+
         }
 
         public VideoBO Delete(int id)

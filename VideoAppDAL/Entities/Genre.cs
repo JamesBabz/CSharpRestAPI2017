@@ -8,9 +8,7 @@ namespace VideoAppDAL.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-
-        public int VideoId { get; set; }
-        public Video Video { get; set; }
+        
+        public List<Video> Videos { get; set; }
     }
 }

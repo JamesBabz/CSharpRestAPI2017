@@ -12,7 +12,8 @@ namespace VideoAppBLL.Converters
             {
                 Id = vid.Id,
                 Name = vid.Name,
-                Price = vid.Price
+                Price = vid.Price,
+                GenreId = vid.GenreId
             };
         }
         internal VideoBO Convert(Video vid)
@@ -22,7 +23,9 @@ namespace VideoAppBLL.Converters
             {
                 Id = vid.Id,
                 Name = vid.Name,
-                Price = vid.Price
+                Price = vid.Price,
+                Genre = new GenreConverter().Convert(vid.Genre),
+                GenreId = vid.GenreId
             };
         }
 
