@@ -10,7 +10,8 @@ namespace VideoAppBLL.Services
 {
     class GenreService : IGenreService
     {
-        GenreConverter converter = new GenreConverter();
+        GenreConverter gConverter = new GenreConverter();
+        VideoConverter vConverter = new VideoConverter();
         private DALFacade _facade;
         public GenreService(DALFacade facade)
         {
@@ -21,9 +22,9 @@ namespace VideoAppBLL.Services
         {
             using (var uow = _facade.UnitOfWork)
             {
-               var genreEntity =  uow.GenreRepository.Create(converter.Convert(genre));
+               var genreEntity =  uow.GenreRepository.Create(gConverter.Convert(genre));
                 uow.Complete();
-                return converter.Convert(genreEntity);
+                return gConverter.Convert(genreEntity);
             }
         }
 
@@ -33,7 +34,7 @@ namespace VideoAppBLL.Services
             {
                 var genreEntity = uow.GenreRepository.Delete(id);
                 uow.Complete();
-                return converter.Convert(genreEntity);
+                return gConverter.Convert(genreEntity);
             }
         }
 
@@ -41,7 +42,13 @@ namespace VideoAppBLL.Services
         {
             using (var uow = _facade.UnitOfWork)
             {
-                return uow.GenreRepository.GetAll().Select(converter.Convert).ToList();
+                var Genres = uow.GenreRepository.GetAll();
+                var GenreList = Genres.Select(gConverter.Convert).ToList();
+                foreach (var genreBO in GenreList)
+                {
+                    genreBO.Videos = Genres.FirstOrDefault(g => g.Id == genreBO.Id).Videos.Select(v => vConverter.Convert(v)).ToList();
+                }
+                return GenreList;
             }
         }
 
@@ -49,7 +56,7 @@ namespace VideoAppBLL.Services
         {
             using (var uow = _facade.UnitOfWork)
             {
-                return converter.Convert(uow.GenreRepository.GetById(id));
+                return gConverter.Convert(uow.GenreRepository.GetById(id));
             }
         }
 
@@ -57,7 +64,7 @@ namespace VideoAppBLL.Services
         {
             using (var uow = _facade.UnitOfWork)
             {
-                return uow.GenreRepository.Search(query).Select(converter.Convert).ToList();
+                return uow.GenreRepository.Search(query).Select(gConverter.Convert).ToList();
             }
         }
 
@@ -72,7 +79,7 @@ namespace VideoAppBLL.Services
                 }
                 genreFromDb.Name = genre.Name;
                 uow.Complete();
-                return converter.Convert(genreFromDb);
+                return gConverter.Convert(genreFromDb);
             }
         }
     }

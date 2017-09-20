@@ -31,7 +31,7 @@ namespace VideoAppDAL.Repositories
 
         public List<Genre> GetAll()
         {
-            return _context.Genres.ToList();
+            return _context.Genres.Include(g => g.Videos).ToList();
         }
 
         public Genre GetById(int id)

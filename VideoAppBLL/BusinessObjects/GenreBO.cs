@@ -9,6 +9,6 @@ namespace VideoAppBLL.BusinessObjects
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public VideoBO Video { get; set; }
+        public List<VideoBO> Videos { get; set; }
     }
 }
