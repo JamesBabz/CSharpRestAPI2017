@@ -35,6 +35,8 @@ namespace VideoRestAPI
             {
                 app.UseDeveloperExceptionPage();
 
+                /*
+
                 //Default videos
                 var facade = new BLLFacade();
 
@@ -64,7 +66,7 @@ namespace VideoRestAPI
 
                 genre = facade.GenreService.Create(new GenreBO()
                 {
-                    Name = "Comedy"
+                    Name = "Thriller"
                 });
 
                 facade.VideoService.Create(new VideoBO()
@@ -73,6 +75,8 @@ namespace VideoRestAPI
                     Price = 100,
                     GenreId = genre.Id
                 });
+
+                */
 
             }
 

@@ -11,57 +11,57 @@ namespace VideoRestAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class VideoController : Controller
+    public class GenresController : Controller
     {
         BLLFacade facade = new BLLFacade();
-        // GET: api/Video
+        // GET: api/Genre
         [HttpGet]
-        public IEnumerable<VideoBO> Get()
+        public IEnumerable<GenreBO> Get()
         {
-            return facade.VideoService.GetAll();
+            return facade.GenreService.GetAll();
         }
 
-        // GET: api/Video/5
+        // GET: api/Genre/5
         [HttpGet("{id}")]
-        public VideoBO Get(int id)
+        public GenreBO Get(int id)
         {
-            return facade.VideoService.GetById(id);
+            return facade.GenreService.GetById(id);
         }
-        
-        // POST: api/Video
+
+        // POST: api/Genre
         [HttpPost]
-        public IActionResult Post([FromBody]VideoBO video)
+        public IActionResult Post([FromBody]GenreBO genre)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(facade.VideoService.Create(video));
+            return Ok(facade.GenreService.Create(genre));
         }
-        
-        // PUT: api/Video/5
+
+        // PUT: api/Genre/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]VideoBO video)
+        public IActionResult Put(int id, [FromBody]GenreBO genre)
         {
-            if(id != video.Id)
+            if (id != genre.Id)
             {
                 return StatusCode(405, "Id's doesnt match");
             }
             try
             {
-            return Ok(facade.VideoService.Update(video));
+                return Ok(facade.GenreService.Update(genre));
             }
-            catch(InvalidOperationException e)
+            catch (InvalidOperationException e)
             {
                 return StatusCode(404, e.Message);
             }
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            facade.VideoService.Delete(id);
+            facade.GenreService.Delete(id);
         }
     }
 }
